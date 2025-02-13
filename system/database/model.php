@@ -179,7 +179,11 @@ abstract class model
 
         foreach ($array as $key => $val)
         {
-            $key = $super.$key;
+            if (is_int($key))
+            {
+                $key = $super.$key;
+            }
+
             $data->$key = $val;
         }
 
