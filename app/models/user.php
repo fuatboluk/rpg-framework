@@ -5,7 +5,7 @@ class user extends model
 
     public function get($email, $column)
     {
-        echo $this->where("email", "=", $email)->select("users", $column)->$column;
+        return $this->where("email", "=", $email)->select("users", $column)->$column;
     }
 
     public function set($email, $column, $value)
