@@ -65,9 +65,16 @@ class rpg
         }
     }
 
-    public static function redirect($url)
+    public static function redirect($url, $wait = 0)
     {
-        return header("Location: ".settings::$scheme."://".settings::$host.$url);
+        if ($wait != 0)
+        {
+            return header("Refresh: ".$wait."; url=".$url);
+        }
+        else
+        {
+            return header("Location: ".$url);
+        }
     }
 
     public static function dump($data)
