@@ -80,20 +80,7 @@ abstract class model
 
         $query = $this->db->query($sql);
 
-        if ($this->where == null && $this->order_by != null || $this->limit != null)
-        {
-            $i = 0;
-            $result = array();
-    
-            while($data = $this->db->fetch($query))
-            {
-                $result[$i] = $data;
-                $i++;
-            }
-            
-            return $this->fetch($result);
-        }
-        else if ($this->where != null)
+        if ($this->where != null)
         {
             return $this->fetch($this->db->fetch($query));
         }
@@ -125,50 +112,36 @@ abstract class model
         }
 
         $sql = "INSERT INTO $table (".implode(",", $keys).") VALUES (".implode(",", $bind).")";
+
         return $this->db->query($sql);
     }
 
-    public function update($table, $data = array())
+    public function update($table, $data, $where)
     {
-        $bind = array();
-
-        foreach ($data as $key => $val)
-        {
-            array_push($bind , $key." = "."'".$val."'");
-        }
-
-        $sql = "UPDATE $table SET ".implode(",", $bind);
-
-        if ($this->$where != null)
-        {
-            $sql .= " WHERE ".$this->$where;
-        }
+        $sql  = "UPDATE $table SET ".key($data)." = "."'".current($data)."'";
+        $sql .= " WHERE ".key($where)." = "."'".current($where)."'";
 
         return $this->db->query($sql);
     }
 
-    public function delete($table)
+    public function delete($table, $where)
     {
-        $sql = "DELETE FROM $table";
-
-        if ($this->$where != null)
-        {
-            $sql .= " WHERE ".$this->$where;
-        }
+        $sql = "DELETE FROM $table WHERE ".key($where)." = "."'".current($where)."'";
 
         return $this->db->query($sql);
     }
 
-    public function fetchColumn($table, $field = null)
+    public function fetchColumn($table, $where = null)
     {
         $sql = "SELECT COUNT(*) FROM $table";
 
-        if ($this->where != null)
+        if ($where != null)
         {
-            $sql .= " WHERE ".$this->where;
+            $sql .= " WHERE ".key($where)." = "."'".current($where)."'";
         }
 
         $query = $this->db->query($sql);
+
         return $this->db->fetchColumn($query);
     }
 
