@@ -80,6 +80,10 @@ class session extends model
             {
                 $this->write($id, $this->get($id, "user"));
             }
+            else
+            {
+                $this->write($id);
+            }
         }
         else
         {
