@@ -15,7 +15,7 @@ class rpg
 
     public static function view($name, $data = null)
     {
-        if (is_array($data) && is_file(settings::$root.'/app/views/'.$name.'.php'))
+        if (is_file(settings::$root.'/app/views/'.$name.'.php'))
         {
             extract($data);
             require settings::$root.'/app/views/'.$name.'.php';
@@ -119,6 +119,18 @@ class rpg
         else
         {
             return $_POST;
+        }
+    }
+
+    public static function file($name = null)
+    {
+        if ($name != null)
+        {
+            return $_FILES[$name];
+        }
+        else
+        {
+            return $_FILES;
         }
     }
 
