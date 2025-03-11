@@ -11,9 +11,18 @@ abstract class model
 
     protected $order_by;
 
+    protected $all = 0;
+
     public function __construct()
     {
         $this->db = new driver;
+    }
+
+    public function all()
+    {
+        $this->all = 1;
+
+        return $this;
     }
 
     public function where($name, $operator, $value)
@@ -80,7 +89,7 @@ abstract class model
 
         $query = $this->db->query($sql);
 
-        if ($this->where != null)
+        if ($this->all == 0)
         {
             return $this->fetch($this->db->fetch($query));
         }
