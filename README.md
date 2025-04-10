@@ -76,6 +76,8 @@ For the route `example.com/contact`, create the file: `app/controllers/contact.p
 Content of the file:
 
 ```
+<?php
+
     class contact extends controller
     {
         public function main()
