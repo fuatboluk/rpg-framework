@@ -3,32 +3,22 @@
 class log
 {
 
-    public static function error_handler($error)
+    public function error_response(Throwable $e)
     {
-        $log = explode("\n", $error);
+        $error = [
+            "line" => $e->getLine(),
+            "status" => get_class($e),
+            "file" => $e->getFile(),
+            "message" => $e->getMessage(),
+            "Stack trace" => explode("\n", $e->getTraceAsString())
+        ];
 
-        $e_all  = explode(": ", $log[0]);
-        $e_file = explode(" in ", $e_all[1]);
-        $e_line = explode(":", $e_file[1]);
-
-        $e_trace = rtrim($log[1], ":");
-        $e_stacks = '["'.implode('","', array_slice($log, 2)).'"]';
-
-        $json  = '{';
-        $json .= '"line":'.($e_line[1] ? $e_line[1] : '""').',';
-        $json .= '"status":"'.$e_all[0].'",';
-        $json .= '"file":"'.$e_line[0].'",';
-        $json .= '"message":"'.str_replace('"', '\"', $e_file[0].(
-                $e_all[2] ? " ".$e_all[2] : ""
-            )
-        ).'",';
-        $json .= '"'.$e_trace.'":'.str_replace(",}]", "}]", $e_stacks);
-        $json .= '}';
+        $json = json_encode($error);
 
         header("Content-Type: application/json");
-
+        http_response_code(500);
         echo $json;
-
+    
         if (settings::$logs == 1)
         {
             return file_put_contents
