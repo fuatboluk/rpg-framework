@@ -3,14 +3,14 @@
 class log
 {
 
-    public function error_response(Throwable $e)
+    public static function error_response(Throwable $e)
     {
         $error = [
-            "line" => $e->getLine(),
-            "status" => get_class($e),
-            "file" => $e->getFile(),
-            "message" => $e->getMessage(),
-            "Stack trace" => explode("\n", $e->getTraceAsString())
+            "Line" => $e->getLine(),
+            "Status" => get_class($e),
+            "File" => $e->getFile(),
+            "Message" => $e->getMessage(),
+            "Stack Trace" => explode("\n", $e->getTraceAsString())
         ];
 
         $json = json_encode($error);
