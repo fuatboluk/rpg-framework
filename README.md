@@ -1,30 +1,32 @@
-# rpg-framework
+# RPG Framework
 
-A small and fast PHP framework.
+A lightweight and high-performance PHP framework designed for simplicity and flexibility.
 
 ## System Settings
 
-System settings are defined in settings.php. The settings you can change are Constants, Database, and Defaults.
+System settings can be configured in the `settings.php` file. The main sections include:
 
-   * Constants → Timezone, language, and debug definitions.
-   * Database  → Database connection information.
-   * Defaults  → Project defaults.
+   * Constants → Defines timezone, language, and debugging settings.
+
+   * Database → Database connection details.
+
+   * Defaults → Default settings for your project.
 
 ## Root Directory
 
-The root directory of your project is `public`. The index.php inside it manages all routes. You can upload CSS, JS, webfonts, images, robots.txt, sitemap.xml, and all accessible resources to this directory.
+Your project's root directory is `public`. The `index.php` inside this directory handles all routing. You can place your static assets such as CSS, JS, webfonts, images, `robots.txt`, and `sitemap.xml` in this directory.
 
 ## Installation
 
-Clone the rpg-framework repository and upload it to the default directory of your web server.
+To get started with RPG Framework, clone the repository and upload it to your web server's root directory.
 
 ## Apache Configuration
 
-RPG comes with a `.htaccess` configuration in the `public` directory for Apache.
+RPG Framework includes an `.htaccess` file for Apache configuration in the `public` directory.
 
 ## Nginx Configuration
 
-You can run the RPG Framework with the nginx configuration provided here.
+If you're using Nginx, you can use the following configuration to serve RPG Framework.
 
 ```
     server {
@@ -67,13 +69,11 @@ You can run the RPG Framework with the nginx configuration provided here.
 
 ## Route Definition
 
-To define a route, a PHP class is created in `app/controllers` that contains the page name. The file and class name must be in lowercase. The `main` method is automatically executed when the address is accessed.
+In RPG Framework, routes are defined by creating PHP classes in the `app/controllers` directory. The file and class names should be in lowercase. The `main` method within the controller is automatically executed when the corresponding URL is accessed.
 
-Example for `example.com/contact`:
+For the route `example.com/contact`, create the file: `app/controllers/contact.php`
 
-Create file: `app/controllers/contact.php`
-
-File content:
+Content of the file:
 
 ```
     class contact extends controller
@@ -85,12 +85,12 @@ File content:
     }
 ```
 
-The controller class is inherited from `app/base/controller.php`. This serves as a base controller to avoid rewriting methods you need to use on every page.
+The controller class inherits from `app/base/controller.php`, which serves as a base controller. This allows you to avoid repeating commonly used methods across your pages.
 
 ## Defaults
 
-Defaults are located in `system/settings.php`. You can enter as many defaults as you want in this field. There are two important variables in the defaults: the `$index` and `$not_found` variables.
+Default settings are located in `system/settings.php`. You can modify these values to suit your needs. Two key variables are:
 
-   * `$index`: The page that receives incoming links to your website. If you want your homepage to be accessed as `example.com` or `example.com/index`, do not change the default value. You need to create `app/controllers/index.php`.
+   * `$index`: The page that receives incoming requests to your website. If you want your homepage to be accessed via `example.com` or `example.com/index`, you don’t need to change the default value. However, you’ll need to create `app/controllers/index.php`.
 
-   * `$not_found`: The page that your website will call when an address is not found. The default value is `not_found`. You can call any error page you want by creating `app/controllers/not_found.php`.
+   * `$not_found`: The page to be displayed when a route is not found. By default, this points to `not_found`. You can customize it by creating `app/controllers/not_found.php`.
