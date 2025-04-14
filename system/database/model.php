@@ -89,8 +89,13 @@ abstract class model
 
         $query = $this->db->query($sql);
 
+        $this->where    = null;
+        $this->limit    = null;
+        $this->order_by = null;
+
         if ($this->all == 0)
         {
+            $this->all = 0;
             return $this->fetch($this->db->fetch($query));
         }
         else
@@ -103,7 +108,8 @@ abstract class model
                 $result[$i] = $data;
                 $i++;
             }
-    
+
+            $this->all = 0;
             return $this->fetch($result);
         }
     }
