@@ -134,6 +134,18 @@ class rpg
         }
     }
 
+    public static function cookie($name = null)
+    {
+        if ($name != null)
+        {
+            return $_COOKIE[$name];
+        }
+        else
+        {
+            return $_COOKIE;
+        }
+    }
+
     public static function close()
     {
         ob_end_flush();
