@@ -5,16 +5,14 @@ class index extends controller
 
     public function main()
     {
-        $data = new stdClass;
+        $this->data->title = "RPG Framework";
+        $this->data->application = "rpg";
+        $this->data->version = "1.0";
 
-        $data->title = "RPG Framework";
-        $data->application = "rpg";
-        $data->version = "1.0";
+        $this->data->phpver = phpversion();
+        $this->data->software = $_SERVER["SERVER_SOFTWARE"];
 
-        $data->phpver = phpversion();
-        $data->software = $_SERVER["SERVER_SOFTWARE"];
-
-        $this->view("index", $data);
+        $this->view("index", $this->data);
     }
 
 }

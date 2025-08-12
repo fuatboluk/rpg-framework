@@ -15,3 +15,5 @@ catch (Throwable $e)
     ob_end_clean();
     $log->error_response($e);
 }
+
+ob_end_flush();

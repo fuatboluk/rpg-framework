@@ -3,16 +3,6 @@
 class rpg
 {
 
-    public function __construct()
-    {
-        self::start();
-    }
-
-    public static function start()
-    {
-        ob_start();
-    }
-
     public static function view($name, $data = null)
     {
         if (is_file(settings::$root.'/app/views/'.$name.'.php'))
@@ -144,16 +134,6 @@ class rpg
         {
             return $_COOKIE;
         }
-    }
-
-    public static function close()
-    {
-        ob_end_flush();
-    }
-
-    public function __destruct()
-    {
-        self::close();
     }
 
 }
