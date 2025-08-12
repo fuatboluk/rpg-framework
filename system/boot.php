@@ -13,6 +13,9 @@ $route    = new route;
 $init     = new init;
 $log      = new log;
 
+// Config
+require settings::$root."/app/root/config.php";
+
 // Database
 require __DIR__."/database/driver.php";
 require __DIR__."/database/model.php";

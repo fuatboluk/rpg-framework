@@ -7,8 +7,8 @@ class driver
 
     public function __construct()
     {
-        $config = "host=".settings::$db_host.";dbname=".settings::$db_name.";charset=utf8";
-        $this->cursor = new PDO(settings::$driver.":".$config, settings::$db_user, settings::$db_pass);
+        $config = "host=".config::$db_host.";dbname=".config::$db_name.";charset=utf8";
+        $this->cursor = new PDO(config::$driver.":".$config, config::$db_user, config::$db_pass);
 
         $this->cursor->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         $this->cursor->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
