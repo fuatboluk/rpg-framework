@@ -2,15 +2,23 @@
 
 A lightweight and high-performance PHP framework designed for simplicity and flexibility.
 
+## Default Index
+
+![Default Index](public/assets/img/rpg-default-index.gif)
+
 ## System Settings
 
 System settings can be configured in the `settings.php` file. The main sections include:
 
    * Constants → Defines timezone, language, and debugging settings.
 
-   * Database → Database connection details.
-
    * Defaults → Default settings for your project.
+
+## App Config
+
+The application configuration file is located at `app/root/config.php`. It is used to define the database connection details and the defaults you will use in your application, such as email SMTP settings, etc.
+
+   * Database → Database connection details.
 
 ## Root Directory
 
